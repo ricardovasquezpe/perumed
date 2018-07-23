@@ -18,6 +18,7 @@ import com.perumed.Networking.models.response.MedicamentoModel;
 import com.perumed.Networking.models.response.ResultMedicamentosModel;
 import com.perumed.Networking.services.MedicamentosService;
 import com.perumed.Util.Adapters.medicamentosListAdapter;
+import com.perumed.Util.Dialogs.loadingDialog;
 import com.perumed.Util.Util;
 
 import java.util.ArrayList;
@@ -34,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     medicamentosListAdapter da_medicamentos;
     List<MedicamentoModel> medicamentosList;
     EditText et_search_med;
+
+    loadingDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void initVariables(){
         medicamentosList = new ArrayList<>();
+        loading          = new loadingDialog(this);
     }
 
     public void initActions(){
@@ -84,6 +88,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getListMedicamentos(){
+        loading.show();
         MedicamentosBody med = new MedicamentosBody();
         med.setAvanzado("");
         med.setTerm(et_search_med.getText().toString().toLowerCase());
@@ -95,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                     medicamentosList.clear();
                     medicamentosList.addAll(response.body().getMedicamentos());
                     da_medicamentos.notifyDataSetChanged();
+                    loading.dismiss();
                 }
             }
 
