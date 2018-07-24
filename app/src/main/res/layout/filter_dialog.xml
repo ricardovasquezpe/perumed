@@ -1,68 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@color/colorWhite"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_marginTop="13dp"
+    android:layout_marginBottom="13dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorWhite"
-        android:orientation="vertical"
-        android:id="@+id/ll_cont_spinners_fil_dialog"
-        android:layout_marginBottom="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Departmento"/>
-
-        <Spinner
-            android:id="@+id/s_departamento_fil_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Provincia"/>
-
-        <Spinner
-            android:id="@+id/s_provincia_fil_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginBottom="10dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="Distrito"/>
-
-        <Spinner
-            android:id="@+id/s_distrito_fil_dialog"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true" />
-
-    </LinearLayout>
-
-    <Button
-        android:id="@+id/button"
+    <TextView
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
-        android:layout_alignParentEnd="true"
-        android:layout_below="@+id/ll_cont_spinners_fil_dialog"
-        android:background="@drawable/button_inline"
-        android:text="Listo"
-        android:textColor="@color/colorWhite" />
+        android:layout_height="wrap_content"
+        android:text="Filtro"
+        android:textSize="18dp"
+        android:id="@+id/tv_titulo_fil_dialog"
+        android:textColor="@color/colorDodgetBlue"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:background="@color/colorDodgetBlue"
+        android:id="@+id/v_sep_titulo_fil_dialog"
+        android:layout_below="@id/tv_titulo_fil_dialog"/>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_sep_titulo_fil_dialog"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorWhite"
+            android:orientation="vertical"
+            android:id="@+id/ll_cont_spinners_fil_dialog"
+            android:layout_marginTop="10dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Departmento"/>
+
+            <Spinner
+                android:id="@+id/s_departamento_fil_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Provincia"/>
+
+            <Spinner
+                android:id="@+id/s_provincia_fil_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginBottom="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="Distrito"/>
+
+            <Spinner
+                android:id="@+id/s_distrito_fil_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_listo_fil_dialog"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/ll_cont_spinners_fil_dialog"
+            android:background="@drawable/button_inline"
+            android:text="Listo"
+            android:textColor="@color/colorWhite" />
+
+    </RelativeLayout>
 
 </RelativeLayout>

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
 import com.perumed.Networking.models.response.UbigeoModel;
@@ -26,6 +27,8 @@ public class filterDialog extends Dialog implements filterDialogView{
     Spinner s_departamento;
     Spinner s_provincia;
     Spinner s_distrito;
+
+    Button btn_listo;
 
     HashMap<String, String> listHashDepartamentos;
     List<String> listDepartamentos;
@@ -60,6 +63,7 @@ public class filterDialog extends Dialog implements filterDialogView{
         s_departamento = findViewById(R.id.s_departamento_fil_dialog);
         s_provincia    = findViewById(R.id.s_provincia_fil_dialog);
         s_distrito     = findViewById(R.id.s_distrito_fil_dialog);
+        btn_listo      = findViewById(R.id.btn_listo_fil_dialog);
     }
 
     public void initVariable(){
@@ -153,6 +157,13 @@ public class filterDialog extends Dialog implements filterDialogView{
 
             }
 
+        });
+
+        btn_listo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dismiss();
+            }
         });
     }
 

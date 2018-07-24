@@ -13,22 +13,18 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.perumed.Core.Main.presenter.MainPresenter;
 import com.perumed.Core.Main.presenter.iMainPresenter;
 import com.perumed.Networking.models.response.MedicamentoModel;
-import com.perumed.Networking.services.Networking;
 import com.perumed.R;
 import com.perumed.Util.Adapters.medicamentosListAdapter;
 import com.perumed.Util.Dialogs.filter.view.filterDialog;
 import com.perumed.Util.Dialogs.loadingDialog;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements MainView{
 
-    Networking networking;
     RecyclerView rv_medicamentos;
     medicamentosListAdapter da_medicamentos;
     List<MedicamentoModel> medicamentosList;
