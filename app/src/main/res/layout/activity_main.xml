@@ -16,19 +16,35 @@
         android:paddingRight="30dp"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/et_search_med_act_main"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="35dp"
-            android:background="@drawable/search_et_background"
-            android:textSize="15dp"
-            android:maxLines="1"
-            android:inputType="text"
-            android:paddingLeft="20dp"
-            android:hint="Busca tu medicamento"
-            android:textColorHint="@color/colorWhite"
-            android:textColor="@color/colorWhite"
-            android:paddingRight="20dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="match_parent"
+                android:src="@drawable/ic_menu_white_24dp"
+                android:textAlignment="center"
+                android:tint="@color/colorDodgetBlue" />
+
+            <EditText
+                android:id="@+id/et_search_med_act_main"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:background="@drawable/search_et_background"
+                android:drawableRight="@drawable/ic_search_white_24dp"
+                android:textSize="15dp"
+                android:maxLines="1"
+                android:inputType="text"
+                android:paddingLeft="20dp"
+                android:hint="Busca tu medicamento"
+                android:textColorHint="@color/colorWhite"
+                android:textColor="@color/colorWhite"
+                android:paddingRight="20dp"/>
+
+        </LinearLayout>
 
         <TextView
             android:layout_marginTop="20dp"

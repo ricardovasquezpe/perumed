@@ -88,27 +88,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void getListMedicamentos(){
-        loading.show();
-        MedicamentosBody med = new MedicamentosBody();
-        med.setAvanzado("");
-        med.setTerm(et_search_med.getText().toString().toLowerCase());
+        String med_nombre = et_search_med.getText().toString().toLowerCase();
+        if(med_nombre.length() != 0){
+            loading.show();
+            MedicamentosBody med = new MedicamentosBody();
+            med.setAvanzado("");
+            med.setTerm(et_search_med.getText().toString().toLowerCase());
 
-        medicamentosService.getMedicamentos(med).enqueue(new Callback<ResultMedicamentosModel>() {
-            @Override
-            public void onResponse(Call<ResultMedicamentosModel> call, Response<ResultMedicamentosModel> response) {
-                if(response.isSuccessful()) {
-                    medicamentosList.clear();
-                    medicamentosList.addAll(response.body().getMedicamentos());
-                    da_medicamentos.notifyDataSetChanged();
-                    loading.dismiss();
+            medicamentosService.getMedicamentos(med).enqueue(new Callback<ResultMedicamentosModel>() {
+                @Override
+                public void onResponse(Call<ResultMedicamentosModel> call, Response<ResultMedicamentosModel> response) {
+                    if(response.isSuccessful()) {
+                        medicamentosList.clear();
+                        medicamentosList.addAll(response.body().getMedicamentos());
+                        da_medicamentos.notifyDataSetChanged();
+                        loading.dismiss();
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<ResultMedicamentosModel> call, Throwable t) {
-                Log.e("RESPONSE", "Unable to submit post to API.");
-            }
-        });
+                @Override
+                public void onFailure(Call<ResultMedicamentosModel> call, Throwable t) {
+                    Log.e("RESPONSE", "Unable to submit post to API.");
+                }
+            });
+        }else{
+            medicamentosList.clear();
+            da_medicamentos.notifyDataSetChanged();
+        }
     }
-
 }
