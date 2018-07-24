@@ -11,5 +11,6 @@ public interface iMainPresenter {
 
     //RESPOSE
     void onSuccessListMedicamentosByNombre(List<MedicamentoModel> medicamentos);
+    void onError(String msg);
 
 }

@@ -11,7 +11,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:paddingLeft="30dp"
         android:paddingRight="30dp"
         android:orientation="vertical">
@@ -49,7 +49,8 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="20dp"
+            android:id="@+id/rl_titulo_act_main">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -77,12 +78,15 @@
             android:layout_height="1dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/colorDodgetBlue"/>
+            android:background="@color/colorDodgetBlue"
+            android:id="@+id/v_sep_titulo_act_main"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true">
+            android:fillViewport="true"
+            android:id="@+id/sv_medicamentos_act_main"
+            android:visibility="gone">
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_medicamentos_act_main"
@@ -91,6 +95,20 @@
                 android:scrollbars="vertical"/>
 
         </ScrollView>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/rv_central_image_act_main">
+
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/capsule" />
+
+        </RelativeLayout>
 
     </LinearLayout>
 

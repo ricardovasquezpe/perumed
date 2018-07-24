@@ -29,6 +29,11 @@ public class MainPresenter implements iMainPresenter{
         mainView.onSuccessListMedicamentosByNombre(medicamentos);
     }
 
+    @Override
+    public void onError(String msg) {
+        mainView.onError(msg);
+    }
+
     /*public interface callback{
         void onSuccess();
 

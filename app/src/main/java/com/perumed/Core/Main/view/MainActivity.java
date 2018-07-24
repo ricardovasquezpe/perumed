@@ -11,7 +11,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.perumed.Core.Main.presenter.MainPresenter;
 import com.perumed.Core.Main.presenter.iMainPresenter;
@@ -40,6 +43,10 @@ public class MainActivity extends AppCompatActivity implements MainView{
     List<MedicamentoModel> medicamentosList;
     EditText et_search_med;
     TextView tv_limpiar;
+    RelativeLayout rl_titulo;
+    View v_sep_titulo;
+    ScrollView sv_medicamentos;
+    RelativeLayout rv_central_image;
 
     loadingDialog loading;
 
@@ -58,14 +65,16 @@ public class MainActivity extends AppCompatActivity implements MainView{
         rv_medicamentos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
         da_medicamentos = new medicamentosListAdapter(medicamentosList);
         rv_medicamentos.setAdapter(da_medicamentos);
-
-
     }
 
     public void initUIViews(){
-        rv_medicamentos = findViewById(R.id.rv_medicamentos_act_main);
-        et_search_med   = findViewById(R.id.et_search_med_act_main);
-        tv_limpiar      = findViewById(R.id.tv_limpiar_act_main);
+        rv_medicamentos  = findViewById(R.id.rv_medicamentos_act_main);
+        et_search_med    = findViewById(R.id.et_search_med_act_main);
+        tv_limpiar       = findViewById(R.id.tv_limpiar_act_main);
+        rl_titulo        = findViewById(R.id.rl_titulo_act_main);
+        v_sep_titulo     = findViewById(R.id.v_sep_titulo_act_main);
+        sv_medicamentos  = findViewById(R.id.sv_medicamentos_act_main);
+        rv_central_image = findViewById(R.id.rv_central_image_act_main);
     }
 
     public void initVariables(){
@@ -92,6 +101,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
                 et_search_med.setText("");
                 medicamentosList.clear();
                 da_medicamentos.notifyDataSetChanged();
+                sv_medicamentos.setVisibility(View.GONE);
+                rv_central_image.setVisibility(View.VISIBLE);
                 tv_limpiar.setVisibility(View.INVISIBLE);
             }
         });
@@ -111,6 +122,9 @@ public class MainActivity extends AppCompatActivity implements MainView{
             loading.show();
             iMainPresenter.getListMedicamentosByNombre(med_nombre);
         }else{
+            sv_medicamentos.setVisibility(View.GONE);
+            rv_central_image.setVisibility(View.VISIBLE);
+            tv_limpiar.setVisibility(View.INVISIBLE);
             medicamentosList.clear();
             da_medicamentos.notifyDataSetChanged();
         }
@@ -120,7 +134,20 @@ public class MainActivity extends AppCompatActivity implements MainView{
         medicamentosList.clear();
         medicamentosList.addAll(listMedicamentosRet);
         da_medicamentos.notifyDataSetChanged();
-        tv_limpiar.setVisibility(View.VISIBLE);
+        if(listMedicamentosRet.size() > 0){
+            sv_medicamentos.setVisibility(View.VISIBLE);
+            rv_central_image.setVisibility(View.GONE);
+            tv_limpiar.setVisibility(View.VISIBLE);
+        }else{
+            sv_medicamentos.setVisibility(View.GONE);
+            rv_central_image.setVisibility(View.VISIBLE);
+            tv_limpiar.setVisibility(View.INVISIBLE);
+        }
         loading.dismiss();
+    }
+
+    @Override
+    public void onError(String msg) {
+        Toast.makeText(this, msg, Toast.LENGTH_SHORT);
     }
 }

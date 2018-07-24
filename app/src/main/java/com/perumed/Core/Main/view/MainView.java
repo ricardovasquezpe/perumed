@@ -8,4 +8,6 @@ public interface MainView {
 
     void onSuccessListMedicamentosByNombre(List<MedicamentoModel> listMedicamentos);
 
+    void onError(String msg);
+
 }
