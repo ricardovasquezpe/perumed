@@ -1,5 +1,6 @@
 package com.perumed.Core.Main.view;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.perumed.Core.Main.presenter.MainPresenter;
 import com.perumed.Core.Main.presenter.iMainPresenter;
+import com.perumed.Core.PriceList.view.PriceListActivity;
 import com.perumed.Networking.models.response.MedicamentoModel;
 import com.perumed.R;
 import com.perumed.Util.Adapters.medicamentosListAdapter;
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         initActions();
 
         rv_medicamentos.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        da_medicamentos = new medicamentosListAdapter(medicamentosList);
+        da_medicamentos = new medicamentosListAdapter(medicamentosList, this);
         rv_medicamentos.setAdapter(da_medicamentos);
     }
 
@@ -128,6 +130,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
         }
     }
 
+    @Override
     public void onSuccessListMedicamentosByNombre(List<MedicamentoModel> listMedicamentosRet){
         medicamentosList.clear();
         medicamentosList.addAll(listMedicamentosRet);
@@ -142,6 +145,19 @@ public class MainActivity extends AppCompatActivity implements MainView{
             tv_limpiar.setVisibility(View.INVISIBLE);
         }
         loading.dismiss();
+    }
+
+    @Override
+    public void goToPriceListActivity(MedicamentoModel item){
+        String[] id_parts = item.getId().split("@");
+
+        Intent intent = new Intent(getBaseContext(), PriceListActivity.class);
+        intent.putExtra("EXTRA_GROUP_MED", id_parts[0]);
+        intent.putExtra("EXTRA_CON_MED", id_parts[1]);
+        intent.putExtra("EXTRA_FFS_MED", id_parts[2]);
+        intent.putExtra("EXTRA_UBIGEO_MED", "15");
+        intent.putExtra("EXTRA_CAD_MED", item.getName().replace(' ', '@'));
+        startActivity(intent);
     }
 
     @Override

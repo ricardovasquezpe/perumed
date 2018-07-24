@@ -6,6 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import com.perumed.Core.Main.view.MainActivity;
+import com.perumed.Core.Main.view.MainView;
 import com.perumed.Networking.models.response.MedicamentoModel;
 import com.perumed.R;
 import java.util.List;
@@ -13,9 +16,11 @@ import java.util.List;
 public class medicamentosListAdapter extends RecyclerView.Adapter<medicamentosListAdapter.ViewHolder>{
     List<MedicamentoModel> data;
     Context context;
+    MainView view;
 
-    public medicamentosListAdapter(List<MedicamentoModel> data) {
+    public medicamentosListAdapter(List<MedicamentoModel> data, MainActivity activity) {
         this.data = data;
+        this.view = activity;
     }
 
     @Override
@@ -47,12 +52,14 @@ public class medicamentosListAdapter extends RecyclerView.Adapter<medicamentosLi
             name      = (TextView) v.findViewById(R.id.nombre_med_row);
             separator = (View) v.findViewById(R.id.separator_med_row);
 
-            /*download.setOnClickListener(new View.OnClickListener() {
+
+
+            v.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    SavedApp item = data.get(getAdapterPosition());
-                    appsFragmentView.onAppDownloadClicked(item);
+                    MedicamentoModel item = data.get(getAdapterPosition());
+                    view.goToPriceListActivity(item);
                 }
-            });*/
+            });
         }
     }
 }

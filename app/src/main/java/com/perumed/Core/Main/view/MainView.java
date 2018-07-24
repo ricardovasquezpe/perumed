@@ -8,6 +8,8 @@ public interface MainView {
 
     void onSuccessListMedicamentosByNombre(List<MedicamentoModel> listMedicamentos);
 
+    void goToPriceListActivity(MedicamentoModel item);
+
     void onError(String msg);
 
 }

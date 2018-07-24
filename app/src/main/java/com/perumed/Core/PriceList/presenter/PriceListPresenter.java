@@ -19,7 +19,7 @@ public class PriceListPresenter implements iPriceListPresenter {
 
     @Override
     public void getListPriceByMedicamento(String grupo, String con, String ffs, String ubigeo, String cad) {
-        interactor.getListPriceByMedicamento("", "", "", "", "");
+        interactor.getListPriceByMedicamento(grupo, con, ffs, ubigeo, cad);
     }
 
     @Override
