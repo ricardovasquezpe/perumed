@@ -27,7 +27,8 @@
                 android:layout_height="match_parent"
                 android:src="@drawable/ic_menu_white_24dp"
                 android:textAlignment="center"
-                android:tint="@color/colorDodgetBlue" />
+                android:tint="@color/colorDodgetBlue"
+                android:id="@+id/iv_filter_act_main"/>
 
             <EditText
                 android:id="@+id/et_search_med_act_main"

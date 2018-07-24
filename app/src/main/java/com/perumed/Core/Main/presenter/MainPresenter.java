@@ -34,10 +34,4 @@ public class MainPresenter implements iMainPresenter{
         mainView.onError(msg);
     }
 
-    /*public interface callback{
-        void onSuccess();
-
-        void onError();
-    }*/
-
 }

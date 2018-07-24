@@ -1,16 +1,14 @@
 package com.perumed.Core.Main.view;
 
-import android.app.Activity;
-import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -18,26 +16,19 @@ import android.widget.Toast;
 
 import com.perumed.Core.Main.presenter.MainPresenter;
 import com.perumed.Core.Main.presenter.iMainPresenter;
-import com.perumed.Networking.RetrofitClient;
-import com.perumed.Networking.models.request.MedicamentosBody;
 import com.perumed.Networking.models.response.MedicamentoModel;
-import com.perumed.Networking.models.response.ResultMedicamentosModel;
-import com.perumed.Networking.services.MedicamentosService;
+import com.perumed.Networking.services.Networking;
 import com.perumed.R;
 import com.perumed.Util.Adapters.medicamentosListAdapter;
+import com.perumed.Util.Dialogs.filter.view.filterDialog;
 import com.perumed.Util.Dialogs.loadingDialog;
-import com.perumed.Util.Util;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class MainActivity extends AppCompatActivity implements MainView{
 
-    MedicamentosService medicamentosService;
+    Networking networking;
     RecyclerView rv_medicamentos;
     medicamentosListAdapter da_medicamentos;
     List<MedicamentoModel> medicamentosList;
@@ -47,8 +38,10 @@ public class MainActivity extends AppCompatActivity implements MainView{
     View v_sep_titulo;
     ScrollView sv_medicamentos;
     RelativeLayout rv_central_image;
+    ImageView iv_filter;
 
     loadingDialog loading;
+    filterDialog filter;
 
     iMainPresenter iMainPresenter;
 
@@ -75,11 +68,13 @@ public class MainActivity extends AppCompatActivity implements MainView{
         v_sep_titulo     = findViewById(R.id.v_sep_titulo_act_main);
         sv_medicamentos  = findViewById(R.id.sv_medicamentos_act_main);
         rv_central_image = findViewById(R.id.rv_central_image_act_main);
+        iv_filter        = findViewById(R.id.iv_filter_act_main);
     }
 
     public void initVariables(){
         medicamentosList = new ArrayList<>();
         loading          = new loadingDialog(this);
+        filter           = new filterDialog(this);
         iMainPresenter   = new MainPresenter(this);
     }
 
@@ -104,6 +99,13 @@ public class MainActivity extends AppCompatActivity implements MainView{
                 sv_medicamentos.setVisibility(View.GONE);
                 rv_central_image.setVisibility(View.VISIBLE);
                 tv_limpiar.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        iv_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filter.show();
             }
         });
     }
