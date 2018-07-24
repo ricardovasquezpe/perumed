@@ -1,4 +1,4 @@
-package com.perumed;
+package com.perumed.Core.Main.view;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,12 +11,16 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
+import com.perumed.Core.Main.presenter.MainPresenter;
+import com.perumed.Core.Main.presenter.iMainPresenter;
 import com.perumed.Networking.RetrofitClient;
 import com.perumed.Networking.models.request.MedicamentosBody;
 import com.perumed.Networking.models.response.MedicamentoModel;
 import com.perumed.Networking.models.response.ResultMedicamentosModel;
 import com.perumed.Networking.services.MedicamentosService;
+import com.perumed.R;
 import com.perumed.Util.Adapters.medicamentosListAdapter;
 import com.perumed.Util.Dialogs.loadingDialog;
 import com.perumed.Util.Util;
@@ -28,15 +32,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements MainView{
 
     MedicamentosService medicamentosService;
     RecyclerView rv_medicamentos;
     medicamentosListAdapter da_medicamentos;
     List<MedicamentoModel> medicamentosList;
     EditText et_search_med;
+    TextView tv_limpiar;
 
     loadingDialog loading;
+
+    iMainPresenter iMainPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +59,19 @@ public class MainActivity extends AppCompatActivity {
         da_medicamentos = new medicamentosListAdapter(medicamentosList);
         rv_medicamentos.setAdapter(da_medicamentos);
 
-        medicamentosService = RetrofitClient.getClient(Util.BASE_URL).create(MedicamentosService.class);
 
     }
 
     public void initUIViews(){
         rv_medicamentos = findViewById(R.id.rv_medicamentos_act_main);
         et_search_med   = findViewById(R.id.et_search_med_act_main);
+        tv_limpiar      = findViewById(R.id.tv_limpiar_act_main);
     }
 
     public void initVariables(){
         medicamentosList = new ArrayList<>();
         loading          = new loadingDialog(this);
+        iMainPresenter   = new MainPresenter(this);
     }
 
     public void initActions(){
@@ -75,6 +83,16 @@ public class MainActivity extends AppCompatActivity {
                     return true;
                 }
                 return false;
+            }
+        });
+
+        tv_limpiar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                et_search_med.setText("");
+                medicamentosList.clear();
+                da_medicamentos.notifyDataSetChanged();
+                tv_limpiar.setVisibility(View.INVISIBLE);
             }
         });
     }
@@ -91,29 +109,18 @@ public class MainActivity extends AppCompatActivity {
         String med_nombre = et_search_med.getText().toString().toLowerCase();
         if(med_nombre.length() != 0){
             loading.show();
-            MedicamentosBody med = new MedicamentosBody();
-            med.setAvanzado("");
-            med.setTerm(et_search_med.getText().toString().toLowerCase());
-
-            medicamentosService.getMedicamentos(med).enqueue(new Callback<ResultMedicamentosModel>() {
-                @Override
-                public void onResponse(Call<ResultMedicamentosModel> call, Response<ResultMedicamentosModel> response) {
-                    if(response.isSuccessful()) {
-                        medicamentosList.clear();
-                        medicamentosList.addAll(response.body().getMedicamentos());
-                        da_medicamentos.notifyDataSetChanged();
-                        loading.dismiss();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<ResultMedicamentosModel> call, Throwable t) {
-                    Log.e("RESPONSE", "Unable to submit post to API.");
-                }
-            });
+            iMainPresenter.getListMedicamentosByNombre(med_nombre);
         }else{
             medicamentosList.clear();
             da_medicamentos.notifyDataSetChanged();
         }
+    }
+
+    public void onSuccessListMedicamentosByNombre(List<MedicamentoModel> listMedicamentosRet){
+        medicamentosList.clear();
+        medicamentosList.addAll(listMedicamentosRet);
+        da_medicamentos.notifyDataSetChanged();
+        tv_limpiar.setVisibility(View.VISIBLE);
+        loading.dismiss();
     }
 }

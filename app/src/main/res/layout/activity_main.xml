@@ -5,7 +5,7 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".MainActivity"
+    tools:context=".Core.Main.view.MainActivity"
     android:paddingTop="30dp"
     android:background="@color/colorWhite">
 
@@ -46,13 +46,31 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_marginTop="20dp"
-            android:layout_width="wrap_content"
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Encontrados"
-            android:textSize="18dp"
-            android:textColor="@color/colorDodgetBlue"/>
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Encontrados"
+                android:textSize="18dp"
+                android:textColor="@color/colorDodgetBlue"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="invisible"
+                android:id="@+id/tv_limpiar_act_main"
+                android:text="Limpiar"
+                android:textSize="12dp"
+                android:layout_marginTop="5dp"
+                android:textStyle="bold"
+                android:layout_alignParentEnd="true"
+                android:textColor="@color/colorSilverChalice"/>
+
+        </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
