@@ -1,9 +1,10 @@
 package com.perumed.Networking.services;
 
+import com.perumed.Networking.models.request.DistritoBody;
 import com.perumed.Networking.models.request.MedicamentosBody;
-import com.perumed.Networking.models.request.ProvinciasBody;
+import com.perumed.Networking.models.request.ProvinciaBody;
 import com.perumed.Networking.models.response.ResultMedicamentosModel;
-import com.perumed.Networking.models.response.ResultProvinciasModel;
+import com.perumed.Networking.models.response.ResultUbigeoModel;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,6 +19,10 @@ public interface Networking {
 
     @POST("Precios/ProcesoL/Consulta/BusquedaGral.aspx/GetProvincias")
     @Headers("Content-Type: application/json")
-    Call<ResultProvinciasModel> getProvincias(@Body ProvinciasBody body);
+    Call<ResultUbigeoModel> getProvincias(@Body ProvinciaBody body);
+
+    @POST("Precios/ProcesoL/Consulta/BusquedaGral.aspx/GetDistritos")
+    @Headers("Content-Type: application/json")
+    Call<ResultUbigeoModel> getDistritos(@Body DistritoBody body);
 
 }

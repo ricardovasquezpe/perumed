@@ -41,6 +41,7 @@ public class Util {
 
     public static List<String> GETDEPARTAMENTOSSTRINGS(){
         List<String> lista = new ArrayList<>();
+        lista.add("Seleccione un Departamento");
         lista.add("Amazonas");
         lista.add("Ancash");
         lista.add("Apurimac");

@@ -1,7 +1,8 @@
 package com.perumed.Util.Dialogs.filter.presenter;
 
-import com.perumed.Networking.models.request.ProvinciasBody;
-import com.perumed.Networking.models.response.ProvinciaModel;
+import com.perumed.Networking.models.request.DistritoBody;
+import com.perumed.Networking.models.request.ProvinciaBody;
+import com.perumed.Networking.models.response.UbigeoModel;
 import com.perumed.Util.Dialogs.filter.interactor.filterDialogInteractor;
 import com.perumed.Util.Dialogs.filter.view.filterDialog;
 import com.perumed.Util.Dialogs.filter.view.filterDialogView;
@@ -17,15 +18,22 @@ public class filterDialogPresenter implements iFilterDialogPresenter{
     }
 
     @Override
-    public void getListProvinciasByDepartamento(String cod) {
-        ProvinciasBody body = new ProvinciasBody();
-        body.setCod_dep(cod);
-        filterDialogInteractor.getListProvinciasByDepartamento(body);
+    public void getListUbigeoBySearch(String codDep, String codProv) {
+        if(codProv.isEmpty()){//BUSCA PROVINCIAS
+            ProvinciaBody body = new ProvinciaBody();
+            body.setCod_dep(codDep);
+            filterDialogInteractor.getListProvinciasBySearch(body);
+        }else{ //BUSCA DISTRITOS
+            DistritoBody body = new DistritoBody();
+            body.setCod_dep(codDep);
+            body.setCod_prov(codProv);
+            filterDialogInteractor.getListDistritosBySearch(body);
+        }
     }
 
     @Override
-    public void onSuccessListProvinciasByDepartamento(List<ProvinciaModel> provincias) {
-        filterDialogView.onSuccessListProvinciasByDepartamento(provincias);
+    public void onSuccessListUbigeoBySearch(List<UbigeoModel> provincias, String type) {
+        filterDialogView.onSuccessListUbigeoBySearch(provincias, type);
     }
 
     @Override

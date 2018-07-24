@@ -2,7 +2,7 @@ package com.perumed.Networking.models.response;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ProvinciaModel {
+public class UbigeoModel {
     @SerializedName("__type")
     private
     String __type;
