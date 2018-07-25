@@ -152,11 +152,12 @@ public class MainActivity extends AppCompatActivity implements MainView{
         String[] id_parts = item.getId().split("@");
 
         Intent intent = new Intent(getBaseContext(), PriceListActivity.class);
+        intent.putExtra("EXTRA_NAME", item.getName());
         intent.putExtra("EXTRA_GROUP_MED", id_parts[0]);
-        intent.putExtra("EXTRA_CON_MED", id_parts[1]);
-        intent.putExtra("EXTRA_FFS_MED", id_parts[2]);
-        intent.putExtra("EXTRA_UBIGEO_MED", "15");
-        intent.putExtra("EXTRA_CAD_MED", item.getName().replace(' ', '@'));
+        intent.putExtra("EXTRA_CON_MED", id_parts[2].replace(' ', '*'));
+        intent.putExtra("EXTRA_FFS_MED", id_parts[3]);
+        intent.putExtra("EXTRA_UBIGEO_MED", "04");
+        intent.putExtra("EXTRA_CAD_MED", item.getName().replace(' ', '*'));
         startActivity(intent);
     }
 

@@ -3,16 +3,15 @@ package com.perumed.Core.PriceList.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
-
 import com.perumed.Core.PriceList.presenter.PriceListPresenter;
 import com.perumed.Core.PriceList.presenter.iPriceListPresenter;
 import com.perumed.R;
-
 import java.util.List;
 
 public class PriceListActivity extends AppCompatActivity implements PriceListView{
 
     iPriceListPresenter presenter;
+    String nameExtra;
     String grupoExtra;
     String conExtra;
     String ffsExtra;
@@ -29,13 +28,14 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
         initUIViews();
         initActions();
 
+        nameExtra   = getIntent().getStringExtra("EXTRA_NAME");
         grupoExtra  = getIntent().getStringExtra("EXTRA_GROUP_MED");
         conExtra    = getIntent().getStringExtra("EXTRA_CON_MED");
         ffsExtra    = getIntent().getStringExtra("EXTRA_FFS_MED");
         ubigeoExtra = getIntent().getStringExtra("EXTRA_UBIGEO_MED");
         cadExtra    = getIntent().getStringExtra("EXTRA_CAD_MED");
 
-        if(!grupoExtra.isEmpty() && !conExtra.isEmpty() && !ffsExtra.isEmpty() && !ubigeoExtra.isEmpty() && !cadExtra.isEmpty()){
+        if(!grupoExtra.isEmpty() && !conExtra.isEmpty() && !ffsExtra.isEmpty() && !ubigeoExtra.isEmpty() && !cadExtra.isEmpty() && !nameExtra.isEmpty()){
             initData();
         }
     }
