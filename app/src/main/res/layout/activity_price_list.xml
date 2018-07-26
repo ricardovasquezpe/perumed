@@ -36,6 +36,20 @@
 
             </RelativeLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fillViewport="true"
+                android:id="@+id/sv_precio_medicamento_act_price_list">
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_precio_medicamento_act_price_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scrollbars="vertical"/>
+
+            </ScrollView>
+
     </LinearLayout>
 
 </LinearLayout>

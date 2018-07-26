@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.perumed.Core.Main.view.MainActivity;
 import com.perumed.Core.Main.view.MainView;
 import com.perumed.Networking.models.response.MedicamentoModel;

@@ -2,10 +2,16 @@ package com.perumed.Core.PriceList.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 import com.perumed.Core.PriceList.presenter.PriceListPresenter;
 import com.perumed.Core.PriceList.presenter.iPriceListPresenter;
 import com.perumed.R;
+import com.perumed.Util.Adapters.medicamentosListAdapter;
+import com.perumed.Util.Adapters.precioMedicamentosListAdapter;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class PriceListActivity extends AppCompatActivity implements PriceListView{
@@ -18,6 +24,10 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
     String ubigeoExtra;
     String cadExtra;
 
+    RecyclerView rv_precios_medicamento;
+    precioMedicamentosListAdapter da_precio_medicamento;
+    List<Object> precioMedicamentoList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +37,10 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
         initVariables();
         initUIViews();
         initActions();
+
+        rv_precios_medicamento.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
+        da_precio_medicamento = new precioMedicamentosListAdapter(precioMedicamentoList, this);
+        rv_precios_medicamento.setAdapter(da_precio_medicamento);
 
         nameExtra   = getIntent().getStringExtra("EXTRA_NAME");
         grupoExtra  = getIntent().getStringExtra("EXTRA_GROUP_MED");
@@ -41,11 +55,12 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
     }
 
     public void initVariables(){
-        presenter = new PriceListPresenter(this);
+        presenter             = new PriceListPresenter(this);
+        precioMedicamentoList = new ArrayList<>();
     }
 
     public void initUIViews(){
-
+        rv_precios_medicamento = findViewById(R.id.rv_precio_medicamento_act_price_list);
     }
 
     public void initActions(){
@@ -58,7 +73,9 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
 
     @Override
     public void onSuccessListPriceByMedicamento(List<Object> precios) {
-
+        precioMedicamentoList.clear();
+        precioMedicamentoList.addAll(precios);
+        da_precio_medicamento.notifyDataSetChanged();
     }
 
     @Override

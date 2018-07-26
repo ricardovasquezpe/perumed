@@ -5,7 +5,12 @@ import com.perumed.Core.PriceList.presenter.iPriceListPresenter;
 import com.perumed.Networking.RetrofitClient;
 import com.perumed.Networking.models.response.ResultPrecioMedicamentos;
 import com.perumed.Networking.services.Networking;
+import com.perumed.Util.Models.PrecioMedicamentoModel;
 import com.perumed.Util.Util;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import retrofit2.Callback;
 import retrofit2.Call;
 import retrofit2.Response;
