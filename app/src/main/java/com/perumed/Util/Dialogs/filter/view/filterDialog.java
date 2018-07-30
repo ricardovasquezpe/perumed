@@ -11,6 +11,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import com.perumed.Core.Main.view.MainActivity;
+import com.perumed.Core.Main.view.MainView;
 import com.perumed.Networking.models.response.UbigeoModel;
 import com.perumed.R;
 import com.perumed.Util.Dialogs.filter.presenter.filterDialogPresenter;
@@ -23,7 +26,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class filterDialog extends Dialog implements filterDialogView{
-
     Spinner s_departamento;
     Spinner s_provincia;
     Spinner s_distrito;
@@ -43,6 +45,12 @@ public class filterDialog extends Dialog implements filterDialogView{
     String codDepTemp  = "";
     String codProvTemp = "";
     String codDistTemp = "";
+
+    static MainView view;
+
+    public static void newInstance(MainActivity activity){
+        view = activity;
+    }
 
     public filterDialog(@NonNull Context context) {
         super(context);
@@ -162,9 +170,28 @@ public class filterDialog extends Dialog implements filterDialogView{
         btn_listo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dismiss();
+                setValuesView();
             }
         });
+    }
+
+    public void setValuesView(){
+        String nombreDep = listDepartamentos.get(s_departamento.getSelectedItemPosition());
+        String codDep    = (listHashDepartamentos.get(nombreDep) == null) ? "" : listHashDepartamentos.get(nombreDep);
+
+        String nombreProv = listProvincias.get(s_provincia.getSelectedItemPosition());
+        String codProv    = (listHashProvincias.get(nombreProv) == null) ? "" : listHashProvincias.get(nombreProv);
+
+        String nombreDist = listDistritos.get(s_distrito.getSelectedItemPosition());
+        String codDist    = (listHashDistritos.get(nombreDist) == null) ? "" : listHashDistritos.get(nombreDist);
+
+        if(codDist.isEmpty()) {
+            view.setUbigeoValue(codDep + codProv);
+        }else{
+            view.setUbigeoValue(codDist);
+        }
+
+        dismiss();
     }
 
     public void limpiarProvinciasSpinner(){

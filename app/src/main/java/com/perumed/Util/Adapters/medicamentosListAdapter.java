@@ -51,8 +51,6 @@ public class medicamentosListAdapter extends RecyclerView.Adapter<medicamentosLi
             name      = (TextView) v.findViewById(R.id.nombre_med_row);
             separator = (View) v.findViewById(R.id.separator_med_row);
 
-
-
             v.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     MedicamentoModel item = data.get(getAdapterPosition());

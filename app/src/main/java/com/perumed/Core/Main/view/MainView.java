@@ -12,4 +12,6 @@ public interface MainView {
 
     void onError(String msg);
 
+    void setUbigeoValue(String ubigeoVal);
+
 }

@@ -5,10 +5,9 @@ import com.perumed.Core.Main.view.MainActivity;
 import com.perumed.Core.Main.view.MainView;
 import com.perumed.Networking.models.request.MedicamentosBody;
 import com.perumed.Networking.models.response.MedicamentoModel;
-
 import java.util.List;
 
-public class MainPresenter implements iMainPresenter{
+public class MainPresenter implements iMainPresenter {
 
     MainView mainView;
     MainInteractor mainInteractor = new MainInteractor(this);

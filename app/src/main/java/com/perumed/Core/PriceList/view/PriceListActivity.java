@@ -1,5 +1,6 @@
 package com.perumed.Core.PriceList.view;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -76,6 +77,13 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
         precioMedicamentoList.clear();
         precioMedicamentoList.addAll(precios);
         da_precio_medicamento.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onMapClicked(String url) {
+        Intent intent = new Intent(getBaseContext(), PriceListActivity.class);
+        intent.putExtra("EXTRA_URL", url);
+        startActivity(intent);
     }
 
     @Override

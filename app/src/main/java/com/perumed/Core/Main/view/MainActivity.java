@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity implements MainView{
 
     iMainPresenter iMainPresenter;
 
+    String ubigeo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,8 +74,10 @@ public class MainActivity extends AppCompatActivity implements MainView{
     public void initVariables(){
         medicamentosList = new ArrayList<>();
         loading          = new loadingDialog(this);
-        filter           = new filterDialog(this);
+        filter = new filterDialog(this);
+        filter.newInstance(this);
         iMainPresenter   = new MainPresenter(this);
+        ubigeo = "";
     }
 
     public void initActions(){
@@ -131,6 +135,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
     }
 
     @Override
+    public void setUbigeoValue(String ubigeoVal){
+        this.ubigeo = ubigeoVal;
+    }
+
+    @Override
     public void onSuccessListMedicamentosByNombre(List<MedicamentoModel> listMedicamentosRet){
         medicamentosList.clear();
         medicamentosList.addAll(listMedicamentosRet);
@@ -156,7 +165,11 @@ public class MainActivity extends AppCompatActivity implements MainView{
         intent.putExtra("EXTRA_GROUP_MED", id_parts[0]);
         intent.putExtra("EXTRA_CON_MED", id_parts[2].replace(' ', '*'));
         intent.putExtra("EXTRA_FFS_MED", id_parts[3]);
-        intent.putExtra("EXTRA_UBIGEO_MED", "04");
+        if(ubigeo.isEmpty()){
+            intent.putExtra("EXTRA_UBIGEO_MED", "15");
+        } else {
+            intent.putExtra("EXTRA_UBIGEO_MED", ubigeo);
+        }
         intent.putExtra("EXTRA_CAD_MED", item.getName().replace(' ', '*'));
         startActivity(intent);
     }

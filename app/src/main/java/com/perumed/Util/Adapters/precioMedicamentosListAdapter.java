@@ -39,15 +39,16 @@ public class precioMedicamentosListAdapter extends RecyclerView.Adapter<precioMe
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         final Object item = data.get(position);
-
+        String[] stringArray = null;
         try{
             String array = item.toString();
-            JSONObject arrayObj = new JSONObject(array);
-        }catch(Exception e){
-            String g = "";
-        }
+            array.replace("[", "");
+            array.replace("]", "");
+            stringArray = array.split(",");
+        }catch(Exception e){}
 
-        //holder.name.setText(item.getName());
+        holder.name.setText(stringArray[3].trim());
+        holder.price.setText(stringArray[7]);
         if(position == data.size() - 1){
             holder.separator.setVisibility(View.INVISIBLE);
         }
@@ -74,7 +75,16 @@ public class precioMedicamentosListAdapter extends RecyclerView.Adapter<precioMe
             map.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     Object item = data.get(getAdapterPosition());
-                    //view.goToPriceListActivity(item);
+                    String[] stringArray = null;
+                    try{
+                        String array = item.toString();
+                        array.replace("[", "");
+                        array.replace("]", "");
+                        stringArray = array.split(",");
+                    }catch(Exception e){}
+                    if(!stringArray[8].isEmpty()){
+                        view.onMapClicked(stringArray[8]);
+                    }
                 }
             });
         }
