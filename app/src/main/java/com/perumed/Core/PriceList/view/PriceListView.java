@@ -8,6 +8,6 @@ public interface PriceListView {
 
     void onSuccessListPriceByMedicamento(List<Object> precios);
 
-    void onMapClicked(String url);
+    void onMapClicked(String idp, String ide);
 
 }

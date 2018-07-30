@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
+
+import com.perumed.Core.Detail.view.DetailActivity;
 import com.perumed.Core.PriceList.presenter.PriceListPresenter;
 import com.perumed.Core.PriceList.presenter.iPriceListPresenter;
 import com.perumed.R;
@@ -80,9 +82,10 @@ public class PriceListActivity extends AppCompatActivity implements PriceListVie
     }
 
     @Override
-    public void onMapClicked(String url) {
-        Intent intent = new Intent(getBaseContext(), PriceListActivity.class);
-        intent.putExtra("EXTRA_URL", url);
+    public void onMapClicked(String idp, String ide) {
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("EXTRA_IDP", idp);
+        intent.putExtra("EXTRA_IDE", ide);
         startActivity(intent);
     }
 

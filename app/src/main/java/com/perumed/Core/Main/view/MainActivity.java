@@ -160,7 +160,7 @@ public class MainActivity extends AppCompatActivity implements MainView{
     public void goToPriceListActivity(MedicamentoModel item){
         String[] id_parts = item.getId().split("@");
 
-        Intent intent = new Intent(getBaseContext(), PriceListActivity.class);
+        Intent intent = new Intent(this, PriceListActivity.class);
         intent.putExtra("EXTRA_NAME", item.getName());
         intent.putExtra("EXTRA_GROUP_MED", id_parts[0]);
         intent.putExtra("EXTRA_CON_MED", id_parts[2].replace(' ', '*'));

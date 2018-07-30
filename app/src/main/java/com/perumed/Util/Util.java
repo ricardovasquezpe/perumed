@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Util {
 
-    public static String BASE_URL = "http://observatorio.digemid.minsa.gob.pe/";
+    public static String BASE_URL = "http://observatorio.digemid.minsa.gob.pe";
 
     public static HashMap<String, String> GETDEPARTAMENTOS(){
         HashMap<String, String> lista = new HashMap<String, String>();

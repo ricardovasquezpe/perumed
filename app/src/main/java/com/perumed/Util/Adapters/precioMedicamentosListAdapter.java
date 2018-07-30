@@ -15,6 +15,7 @@ import com.perumed.Core.PriceList.view.PriceListView;
 import com.perumed.Networking.models.response.MedicamentoModel;
 import com.perumed.R;
 
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -78,12 +79,11 @@ public class precioMedicamentosListAdapter extends RecyclerView.Adapter<precioMe
                     String[] stringArray = null;
                     try{
                         String array = item.toString();
-                        array.replace("[", "");
-                        array.replace("]", "");
+                        array = StringUtils.removeStart(StringUtils.removeEnd(array, "]"), "[");
                         stringArray = array.split(",");
                     }catch(Exception e){}
                     if(!stringArray[8].isEmpty()){
-                        view.onMapClicked(stringArray[8]);
+                        view.onMapClicked(stringArray[0], stringArray[5]);
                     }
                 }
             });
